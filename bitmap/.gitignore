@@ -1,0 +1,9 @@
+CMakeCache.txt
+CMakeFiles
+GPATH
+GRTAGS
+GTAGS
+bitmap_test
+*.a
+*.cmake
+Makefile
