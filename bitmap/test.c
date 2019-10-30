@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "bitmap.h"
+#include "memory.h"
 
 static int main_ret = 0;
 static int test_count = 0;
@@ -32,9 +33,30 @@ static void test_t() {
   EXPECT_EQ_INT(0, test(value));
 }
 
+static void test_get_memory_kb() {
+  // bug code. 3979 segmentation fault (core dumped)
+  /* long* vmsize_kb; */
+  /* long* vmrss_kb; */
+  /* int res = get_memory_usage_kb(vmsize_kb, vmrss_kb); */
+
+  long vmsize_kb;
+  long vmrss_kb;
+  int res = get_memory_usage_kb(&vmsize_kb, &vmrss_kb);
+
+
+  fprintf(stdout, "Current memory usage: VmRSS = %ld, VmSize = %ld\n", vmrss_kb, vmsize_kb);
+
+  EXPECT_EQ_INT(res, 0);
+}
+
+static void run_all_test() {
+  test_t();
+  test_get_memory_kb();
+}
+
 
 int main() {
-    test_t();
-    printf("%d/%d (%3.2f%%) passed\n", test_pass, test_count, test_pass * 100.0 / test_count);
-    return main_ret;
+  run_all_test();
+  printf("%d/%d (%3.2f%%) passed\n", test_pass, test_count, test_pass * 100.0 / test_count);
+  return main_ret;
 }
