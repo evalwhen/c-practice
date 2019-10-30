@@ -30,6 +30,7 @@ int get_memory_usage_kb(long* vmrss_kb, long* vmsize_kb) {
 
     if (vmrss_ptr != NULL) {
       // line 为什么指一行
+      // 因为 strtok 使用了静态变量
       sscanf(line, "%*s %ld", vmrss_kb);
       found_vmrss = 1;
     }
