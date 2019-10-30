@@ -20,3 +20,6 @@ make
    valgrind -v ./bitmap_test
   
    
+## QA
+
+1. how strtok works.
