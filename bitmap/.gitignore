@@ -8,3 +8,5 @@ bitmap_test
 *.cmake
 vgcore.*
 Makefile
+.idea
+*.cbp
