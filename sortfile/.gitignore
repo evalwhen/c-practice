@@ -11,3 +11,5 @@ Makefile
 .idea
 *.cbp
 rand*
+build/*
+cmake*
