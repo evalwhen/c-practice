@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "bitmap.h"
+#include "fourbitmap.h"
 #include "memory.h"
 
 static int main_ret = 0;
@@ -32,7 +33,24 @@ static void test_t() {
   clr(value);
   EXPECT_EQ_INT(0, test(value));
 }
+/*
+  max * fourbit
+  1111 1111 1111 1111   1111 1111 1111 0010
+  15    14   13   12    11   10    9    8
+  7     6     5    4     3    2    1    0
+  28    24   20   16    12    8    4    0
+*/
+static void test_fourbitmap_t() {
+    int value = 8;
+    int i = 0;
+    int total = 15;
+    for (; i < total; i++) {
+        four_set(value);
+    }
+   int result = four_test(value);
 
+    EXPECT_EQ_INT(total, result);
+}
 static void test_get_memory_kb() {
   // bug code. 3979 segmentation fault (core dumped)
   /* long* vmsize_kb; */
@@ -52,6 +70,7 @@ static void test_get_memory_kb() {
 static void run_all_test() {
   test_t();
   test_get_memory_kb();
+  test_fourbitmap_t();
 }
 
 

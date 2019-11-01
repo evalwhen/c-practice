@@ -6,6 +6,7 @@ if (CMAKE_C_COMPILER_ID MATCHES "GUN|Clang")
 endif()
 
 add_library(bitmap bitmap.c)
+add_library(fourbitmap fourbitmap.c)
 add_library(memory memory.c)
 add_executable(bitmap_test test.c)
-target_link_libraries(bitmap_test bitmap memory)
+target_link_libraries(bitmap_test bitmap  fourbitmap memory)
