@@ -30,7 +30,7 @@ int main() {
     get_memory_usage_kb(&rss, &size);
     fprintf(stdout, "Current memory usage: VmRSS = %ld, VmSize = %ld\n", rss, size);
 
-    for (i = 0; i < N; i++) {
+    for (i = 0; i < BITMAP_MAX_SIZE; i++) {
         if (test(i) != 0 ) {
             fprintf(f2, "%d\n", i);
         }

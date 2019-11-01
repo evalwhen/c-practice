@@ -5,47 +5,54 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <limits.h>
 
 #define MAX_N 10000000
-#define BITMAP_MAX 100
-// 使用小容量的 bitmap 完成磁盘文件内容排序
+/* 如果 bitmap 所能表示的最大整数小于 MAX_N,
+   可以通过多趟（pass) 来排序，比如 bitmap 能
+   表示的最大整数是100, 但需要排序的最大整数是1000,
+   那么可以 10 躺来完成排序 0 - 99, 100 - 199 ...;
+
+   实际上就是空间换时间。
+ */
+
 int main() {
     clock_t start, end;
     double cpu_time_used;
 
     start = clock();
 
+    FILE* f = fopen("rand_no_dup_int.txt", "r+");
     FILE* f2 = fopen("sort_rand_no_dup_int.txt", "w");
 
     uint32_t i, total = 0;
-    int npass = MAX_N / BITMAP_MAX;
+    uint32_t npass = MAX_N / BITMAP_MAX_SIZE;
 
+    report_current_mem_usage();
     for (i = 0; i < npass; i++ ) {
-        FILE* f = fopen("rand_no_dup_int.txt", "r+");
         char *line = NULL;
         size_t len = 0;
 
         while(getline(&line, &len, f) != -1) {
-            int v = strtoimax(line, NULL, 10);
-            if (v >= (i * BITMAP_MAX) && v < ((i+1) * BITMAP_MAX)) {
-                v = v % BITMAP_MAX;
+            uint32_t v = strtoimax(line, NULL, 10);
+            if (v >= (i * BITMAP_MAX_SIZE) && v < ((i+1) * BITMAP_MAX_SIZE)) {
+                v = v % BITMAP_MAX_SIZE;
                 set(v);
                 total++;
             }
         }
 
         int j = 0;
-        for (j = 0; j < BITMAP_MAX; j++) {
+        for (j = 0; j < BITMAP_MAX_SIZE; j++) {
             if (test(j) != 0 ) {
-                fprintf(f2, "%d\n", (j + i * BITMAP_MAX ));
+                fprintf(f2, "%d\n", (j + i * BITMAP_MAX_SIZE ));
                 clr(j);
-//                exit(0);
             }
         }
-
         free(line);
-        fclose(f);
+        rewind(f);
     }
+    fclose(f);
     fclose(f2);
 
     end = clock();

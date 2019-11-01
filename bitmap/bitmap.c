@@ -1,6 +1,6 @@
 #include "bitmap.h"
 
-static int bitmap[1 + N/BITSPERWORD];
+static int bitmap[1 + BITMAP_MAX_SIZE/BITSPERWORD];
 
 // i >> SHIFT == (floor i (expt 2 SHIFT))
 // i & MASK == (rem i (expt 2 SHIFT))
