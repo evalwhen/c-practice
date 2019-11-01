@@ -32,8 +32,8 @@ void four_set(int i) {
 void four_clr(int i) {
   int x = fourbitmap[i >> FSHIFT];
   int mask = x & (1111 << ((i & FMASK) << 2));
-  int fortbit = mask >> ((i & FMASK) << 2);
-  int tmp = (fortbit - 1) & 1111;
+  int fourbit = mask >> ((i & FMASK) << 2);
+  int tmp = (fourbit - 1) & 1111;
   x = x & ~(1111 << ((i & FMASK) << 2));
   x = x | (tmp << ((i & FMASK) << 2));
 
