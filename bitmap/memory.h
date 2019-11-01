@@ -7,5 +7,6 @@
 
 int get_memory_usage_kb(long* vmrss_kb, long* vmsize_kb);
 void report_current_mem_usage();
+double get_time();
 
 #endif

@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 #define N 10000000
-#define M 1000000
+#define M 10000000
 
 uint32_t *x;
 

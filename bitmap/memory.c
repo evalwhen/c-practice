@@ -1,5 +1,6 @@
 #include "memory.h"
-
+#include <sys/time.h>
+#include <sys/resource.h>
 
 int get_memory_usage_kb(long* vmrss_kb, long* vmsize_kb) {
 
@@ -39,6 +40,16 @@ int get_memory_usage_kb(long* vmrss_kb, long* vmsize_kb) {
   }
 
   return (found_vmrss == 1 && found_vmsize == 1) ? 0 : 1;
+}
+
+
+
+double get_time()
+{
+    struct timeval t;
+    struct timezone tzp;
+    gettimeofday(&t, &tzp);
+    return t.tv_sec + t.tv_usec*1e-6;
 }
 
 void report_current_mem_usage(int id) {

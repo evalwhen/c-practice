@@ -4,8 +4,13 @@
 #include <inttypes.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 int main() {
+    clock_t start, end;
+    double cpu_time_used;
+
+    start = clock();
     FILE* f = fopen("rand_no_dup_int.txt", "r+");
     FILE* f2 = fopen("sort_rand_no_dup_int.txt", "w");
 
@@ -30,6 +35,10 @@ int main() {
             fprintf(f2, "%d\n", i);
         }
     }
+    end = clock();
+    cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+    printf("took %f seconds to execute \n", cpu_time_used);
+
 
     long size1, rss1;
     get_memory_usage_kb(&rss1, &size1);
