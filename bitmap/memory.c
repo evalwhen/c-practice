@@ -42,8 +42,6 @@ int get_memory_usage_kb(long* vmrss_kb, long* vmsize_kb) {
   return (found_vmrss == 1 && found_vmsize == 1) ? 0 : 1;
 }
 
-
-
 double get_time()
 {
     struct timeval t;

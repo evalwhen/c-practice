@@ -4,7 +4,7 @@
 #define BITSPERWORD  32
 #define SHIFT  5
 #define MASK  0x1F
-#define N  10000000
+#define N  100
 
 void set(int i); // add element
 void clr(int i); // remove element
