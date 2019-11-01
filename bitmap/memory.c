@@ -22,8 +22,8 @@ int get_memory_usage_kb(long* vmrss_kb, long* vmsize_kb) {
     char* vmsize_ptr = strstr(line, "VmSize");
 
     if (vmsize_ptr != NULL) {
-      sscanf(line, "%*s %ld", vmsize_kb);
-      found_vmsize = 1;
+        sscanf(line, "%*s %ld", vmsize_kb);
+        found_vmsize = 1;
     }
 
     char* vmrss_ptr = strstr(line, "VmRSS");
@@ -31,12 +31,18 @@ int get_memory_usage_kb(long* vmrss_kb, long* vmsize_kb) {
     if (vmrss_ptr != NULL) {
       // line 为什么指一行
       // 因为 strtok 使用了静态变量
-      sscanf(line, "%*s %ld", vmrss_kb);
-      found_vmrss = 1;
+        sscanf(line, "%*s %ld", vmrss_kb);
+        found_vmrss = 1;
     }
 
     line = strtok(NULL, delim);
   }
 
   return (found_vmrss == 1 && found_vmsize == 1) ? 0 : 1;
+}
+
+void report_current_mem_usage(int id) {
+    long vmsize, vmrss;
+    get_memory_usage_kb(&vmrss, &vmsize);
+    fprintf(stdout, "%2d: Current memory usage: VmRSS = %ld, VmSize = %ld\n", id, vmrss, vmsize);
 }

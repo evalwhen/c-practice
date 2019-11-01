@@ -1,4 +1,5 @@
 #include "../bitmap/bitmap.h"
+#include "../bitmap/memory.h"
 #include <stdio.h>
 #include <inttypes.h>
 #include <stdlib.h>
@@ -13,18 +14,27 @@ int main() {
     char *line = NULL;
     size_t len = 0;
 
-
     while(getline(&line, &len, f) != -1) {
         int i = strtoimax(line, NULL, 10);
         set(i);
         total++;
     }
 
+    long size, rss;
+
+    get_memory_usage_kb(&rss, &size);
+    fprintf(stdout, "Current memory usage: VmRSS = %ld, VmSize = %ld\n", rss, size);
+
     for (i = 0; i < N; i++) {
         if (test(i) != 0 ) {
             fprintf(f2, "%d\n", i);
         }
     }
+
+    long size1, rss1;
+    get_memory_usage_kb(&rss1, &size1);
+    fprintf(stdout, "Current memory usage: VmRSS = %ld, VmSize = %ld\n", rss1, size1);
+
 
     free(line);
     fclose(f);
