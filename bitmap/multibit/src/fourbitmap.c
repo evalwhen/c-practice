@@ -1,6 +1,11 @@
 #include "fourbitmap.h"
+#include <string.h>
 
 int fourbitmap[1 + FBITMAP_MAX_SIZE * FOURBIT / FBITSPERWORD];
+
+void init_fourbitmap() {
+  memset(fourbitmap, 0, sizeof(fourbitmap));
+}
 
 // i >> SHIFT == (floor i (expt 2 SHIFT))
 // i & MASK == (rem i (expt 2 SHIFT))

@@ -15,6 +15,7 @@
 #include <inttypes.h>
 
 int main() {
+  init_fourbitmap();
   FILE* f = fopen("rand_no_dup_int.txt", "r+");
   FILE* f2 = fopen("sort_rand_no_dup_int.txt", "w");
 

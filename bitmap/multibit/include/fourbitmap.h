@@ -8,6 +8,7 @@
 #define FBITMAP_MAX_SIZE  10000000
 #define FOUR_BIT_MASK 0xF
 
+void init_fourbitmap();
 void four_set(int i); // add element
 void four_clr(int i); // remove element
 int four_test(int i); // check that the element exists

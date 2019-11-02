@@ -23,6 +23,7 @@ static int test_pass = 0;
 #define EXPECT_EQ_INT(expect, actual) EXPECT_EQ_BASE((expect) == (actual), expect, actual, "%d")
 
 static void test_t() {
+  init_bitmap();
   int expect;
   int value = 9999;
   set(value);
@@ -56,6 +57,7 @@ static void test_get_memory_kb() {
   /* long* vmsize_kb; */
   /* long* vmrss_kb; */
   /* int res = get_memory_usage_kb(vmsize_kb, vmrss_kb); */
+  init_fourbitmap();
 
   long vmsize_kb;
   long vmrss_kb;

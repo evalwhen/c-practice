@@ -1,4 +1,5 @@
 #include "bitmap.h"
+#include <string.h>
 
 static int bitmap[1 + BITMAP_MAX_SIZE/BITSPERWORD];
 
@@ -13,6 +14,7 @@ static int bitmap[1 + BITMAP_MAX_SIZE/BITSPERWORD];
 // i >> SHIFT == (floor i (expt 2 SHIFT))
 // i & MASK == (rem i (expt 2 SHIFT))
 
+void init_bitmap() { memset (bitmap, 0, sizeof (bitmap));}
 void set(int i) { bitmap[i >> SHIFT] |= 1 << (i & MASK); };
 void clr(int i) { bitmap[i >> SHIFT] &= ~(1 << (i & MASK)); };
 int test(int i) { return bitmap[i >> SHIFT] & (1 << (i & MASK));};

@@ -7,6 +7,8 @@
 #include <time.h>
 
 int main() {
+    init_bitmap();
+
     clock_t start, end;
     double cpu_time_used;
 
