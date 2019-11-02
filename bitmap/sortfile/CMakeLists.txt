@@ -24,5 +24,6 @@ target_link_libraries(n_pass_sort
 
 target_link_libraries(dup_sortfile
   multibit
+  memoryusage
   )
 

@@ -10,6 +10,7 @@
  */
 
 #include "fourbitmap.h"
+#include "memoryusage.h"
 #include <stdio.h>
 #include <inttypes.h>
 
@@ -19,6 +20,8 @@ int main() {
 
   char* line = NULL;
   size_t len = 0;
+
+  report_current_mem_usage(1);
 
   while(getline(&line, &len, f) != -1) {
     //TODO: 错误处理。
@@ -36,6 +39,8 @@ int main() {
       }
     }
   }
+
+  report_current_mem_usage(2);
 
   return 0;
 }

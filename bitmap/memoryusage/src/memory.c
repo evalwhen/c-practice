@@ -53,5 +53,5 @@ double get_time()
 void report_current_mem_usage(int id) {
     long vmsize, vmrss;
     get_memory_usage_kb(&vmrss, &vmsize);
-    fprintf(stdout, "%2d: Current memory usage: VmRSS = %ld, VmSize = %ld\n", id, vmrss, vmsize);
+    fprintf(stdout, "%2d: Current memory usage: VmRSS = %ldKB, VmSize = %ldKB\n", id, vmrss, vmsize);
 }
