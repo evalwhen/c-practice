@@ -67,10 +67,16 @@ static void test_get_memory_kb() {
   EXPECT_EQ_INT(res, 0);
 }
 
+static void test_size_of_array() {
+  int shift[256];
+  EXPECT_EQ_INT(1024, sizeof(shift));
+}
+
 static void run_all_test() {
   test_t();
   test_get_memory_kb();
   test_fourbitmap_t();
+  test_size_of_array();
 }
 
 

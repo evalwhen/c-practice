@@ -23,4 +23,5 @@ make
    
 ## QA
 
-1. how strtok works.
+[X] how strtok works.
+[ ] how strstr works.
