@@ -10,7 +10,7 @@ make
 
 ## Run test
 
-./bitmap_test
+./test
 
 ## Debug
 

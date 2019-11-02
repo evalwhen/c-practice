@@ -16,7 +16,14 @@ cmake_minimum_required (VERSION 3.5)
 
 project(bitmap)
 
+# bitmap usecase
 add_subdirectory(sortfile)
+
+# lib: bitmap
 add_subdirectory(singlebit)
+
+# lib: repeatable bitmap
 add_subdirectory(multibit)
+
+# lib: little memory reporter
 add_subdirectory(memoryusage)
