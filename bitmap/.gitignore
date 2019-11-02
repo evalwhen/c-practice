@@ -10,3 +10,5 @@ vgcore.*
 Makefile
 .idea
 *.cbp
+build
+build/*

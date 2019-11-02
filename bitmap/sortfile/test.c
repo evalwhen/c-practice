@@ -3,7 +3,7 @@
 #include <string.h>
 #include "bitmap.h"
 #include "fourbitmap.h"
-#include "memory.h"
+#include "memoryusage.h"
 
 static int main_ret = 0;
 static int test_count = 0;

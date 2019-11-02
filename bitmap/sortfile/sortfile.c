@@ -1,5 +1,5 @@
-#include "../bitmap/bitmap.h"
-#include "../bitmap/memory.h"
+#include "bitmap.h"
+#include "memoryusage.h"
 #include <stdio.h>
 #include <inttypes.h>
 #include <stdlib.h>

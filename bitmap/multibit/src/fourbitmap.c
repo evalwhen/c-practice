@@ -46,4 +46,3 @@ int four_test(int i) {
 
   return fourbit;
 };
-
