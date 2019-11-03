@@ -2,9 +2,9 @@
 bitmap data structure
 
 ## Generate Makefile
-mkdir build
-cd build
-cmake -DCMAKE_BUILD_TYPE=Debug ../
+1. mkdir build
+2. cd build
+3. cmake -DCMAKE_BUILD_TYPE=Debug ../
 
 ## Build
 make
@@ -24,5 +24,5 @@ make
    
 ## QA
 
-[X] how strtok works.
-[ ] how strstr works.
+1. [X] how strtok works.
+2. [ ] how strstr works.
