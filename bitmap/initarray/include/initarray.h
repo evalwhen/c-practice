@@ -17,7 +17,9 @@
 
 enum State {NO_INIT, HAS_INIT};
 
+// 初始化data[i] = 0
 int init_ele(int *data, int i);
+// 检查 data[i] 是否已经被初始化过
 enum State init_check(int *data, int i);
 
 #endif
