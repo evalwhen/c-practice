@@ -1,0 +1,100 @@
+     t  i  n
+     a  3  12
+
+d e f g h i j k l a b c
+0 1 2 3 4 5 6 7 8 9 10 11
+a b c d e f g h i j k  l
+
+x[3] -> x[0]
+d e f g h i j k l a b c
+0 1 2 3 4 5 6 7 8 9 10 11
+d b c d e f g h i j k  l
+
+x[6] -> x[3]
+d e f g h i j k l a b c
+0 1 2 3 4 5 6 7 8 9 10 11
+d b c g e f g h i j k  l
+
+x[9] -> x[6]
+d e f g h i j k l a b c
+0 1 2 3 4 5 6 7 8 9 10 11
+d b c g e f j h i j k  l
+
+t
+x[12 % 12] -> x[9]
+d e f g h i j k l a b c
+0 1 2 3 4 5 6 7 8 9 10 11
+d b c g e f j h i a k  l
+
+
+      t  i  n
+      b  3  12
+
+x[i + 1] -> x[1 + 0*i]: x[4] -> x[1]
+d e f g h i j k l a b c
+0 1 2 3 4 5 6 7 8 9 10 11
+d e c g e f j h i a k  l
+
+x[2i + 1] -> x[1 + 1i]: x[7] -> x[4]
+d e f g h i j k l a b c
+0 1 2 3 4 5 6 7 8 9 10 11
+d e c g h f j h i a k  l
+
+x[3i + 1] -> x[1 + 2i]: x[10] -> x[7]
+d e f g h i j k l a b c
+0 1 2 3 4 5 6 7 8 9 10 11
+d e c g h f j k i a k  l
+
+x[4i + 1] -> x[1 + 3i]: t -> x[10]
+d e f g h i j k l a b c
+0 1 2 3 4 5 6 7 8 9 10 11
+d e c g h f j k i a b  l
+
+
+      t  i  n
+      c  3  12
+
+x[i + 2] -> x[2 + 0*i]: x[5] -> x[2]
+d e f g h i j k l a b c
+0 1 2 3 4 5 6 7 8 9 10 11
+d e f g h f j k i a b  l
+
+x[2i + 2] -> x[2 + 1*i]: x[8] -> x[5]
+d e f g h i j k l a b c
+0 1 2 3 4 5 6 7 8 9 10 11
+d e f g h i j k i a b  l
+
+x[3i + 2] -> x[2 + 2*i]: x[11] -> x[8]
+d e f g h i j k l a b  c
+0 1 2 3 4 5 6 7 8 9 10 11
+d e f g h i j k l a b  l
+
+x[3i + 2] -> x[2 + 2*i]: t -> x[11]
+d e f g h i j k l a b  c
+0 1 2 3 4 5 6 7 8 9 10 11
+d e f g h i j k l a b c
+
+---------------------------------
+d e f g h i j k l a b  c
+0 1 2 3 4 5 6 7 8 9 10 11
+a b c d e f g h i j k  l
+0     3     6     9
+  1     4     7     10
+    2     5     8      11
+--------------------------
+
+d e f g h i j k l a b  c
+0 1 2 3 4 5 6 7 8 9 10 11
+a b c d e f g h i j k  l
+
+d e f g h i j k l   a b  c
+0 1 2 3 4 5 6 7 8   9 10 11
+j k l d e f g h i   a b  c
+
+d e f g h i  j k l  a b  c
+0 1 2 3 4 5  6 7 8  9 10 11
+g h i d e f  j k l  a b  c
+
+d e f g h i  j k l  a b  c
+0 1 2 3 4 5  6 7 8  9 10 11
+d e f g h i  j k l  a b  c
