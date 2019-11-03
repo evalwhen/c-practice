@@ -2,7 +2,7 @@
 #define BITMAP_INITARRAY_H__
 
 /* Problem 1.9
-    在实践中，经常回使用空间换时间的做法。比如 bitmap,
+    在实践中，经常会使用空间换时间的做法。比如 bitmap,
   当 bitmap 所能表示的集合越大，使用它来排序时所需要的
   时间就越少（见 n_pass_sort.c)。
 
