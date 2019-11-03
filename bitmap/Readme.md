@@ -2,6 +2,7 @@
 bitmap data structure
 
 ## Generate Makefile
+mkdir build
 cd build
 cmake -DCMAKE_BUILD_TYPE=Debug ../
 
