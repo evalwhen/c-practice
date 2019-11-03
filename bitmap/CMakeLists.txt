@@ -27,3 +27,6 @@ add_subdirectory(multibit)
 
 # lib: little memory reporter
 add_subdirectory(memoryusage)
+
+#lib: init bit array when access; Problem 1.9
+add_subdirectory(initarray)

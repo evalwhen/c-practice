@@ -82,6 +82,8 @@ static void run_all_test() {
 }
 
 
+
+
 int main() {
   run_all_test();
   printf("%d/%d (%3.2f%%) passed\n", test_pass, test_count, test_pass * 100.0 / test_count);
