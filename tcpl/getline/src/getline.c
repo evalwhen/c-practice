@@ -25,3 +25,17 @@ void copy(char* from, char* to) {
     i++;
   };
 }
+
+
+/*
+  abcdef
+  fedcba
+ */
+void reverse(char* str, int len) {
+  for(int l = 0, r = len -1; l < r; l++, r--) {
+    char tmp;
+    tmp = str[l];
+    str[l] = str[r];
+    str[r] = tmp;
+  }
+}

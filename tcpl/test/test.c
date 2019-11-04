@@ -19,4 +19,6 @@ int main() {
   }
 
   printf("max_len: %d\n; line: %s\n", max_len, max_line);
+  reverse(max_line, max_len);
+  printf("reverse line: %s\n", max_line);
 }
