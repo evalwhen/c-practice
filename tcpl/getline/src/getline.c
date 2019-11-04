@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 int getline1(char* line, int maxlen) {
 
@@ -38,4 +39,18 @@ void reverse(char* str, int len) {
     str[l] = str[r];
     str[r] = tmp;
   }
+}
+
+
+int strindex(char* str, char* substr) {
+  int i, j, k;
+  for (i = 0; str[i] != '\0'; i++) {
+    for(j = i, k = 0; substr[k] != '\0' && str[j] == str[k]; j++, k++){
+    }
+
+    if (k > 0 && substr[k] == '\0') {
+      return i;
+    }
+  }
+  return -1;
 }
