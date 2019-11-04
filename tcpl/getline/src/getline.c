@@ -9,10 +9,10 @@ int getline1(char* line, int maxlen) {
       line[i] = c;
       i++;
     } else {
-      line[i] = '\0';
       break;
     }
   }
+  line[i] = '\0';
 
   return i;
 }
