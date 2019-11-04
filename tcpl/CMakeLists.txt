@@ -7,3 +7,9 @@ add_subdirectory(getline)
 
 # test binary
 add_subdirectory(test)
+
+# caculator app
+add_subdirectory(caculator)
+
+
+add_subdirectory(stack)
