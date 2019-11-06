@@ -10,7 +10,9 @@ typedef struct {
   size_t capacity;
 } vector;
 
-vector new_vector();
+typedef enum {SUCCESS, INDEX_OUT_OF_BOUND} error;
+
+vector construct();
 size_t size(vector* vec);
 size_t capacity(vector* vec);
 int is_empty(vector* vec);
@@ -23,7 +25,7 @@ void delete(vector* vec, int i);
 int rem(vector* vec, int ele);
 int find(vector* vec, int ele);
 
-int free_vector(vector* vec);
+int destruct(vector* vec);
 /* int resize(vector* vec, int new_cap); */
 
 #endif
