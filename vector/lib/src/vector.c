@@ -1,5 +1,5 @@
 #include "vector.h"
-#include <stdlib.h>
+#include <stdlib.h> /* molloc, realloc */
 #include <assert.h> /* assert()*/
 
 static void _resize(vector* vec);
