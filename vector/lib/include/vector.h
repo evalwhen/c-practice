@@ -18,10 +18,10 @@ size_t capacity(vector* vec);
 int is_empty(vector* vec);
 int at(vector* vec, int i);
 void push(vector* vec, int i);
-void insert(vector* vec, int i, int ele);
+int insert(vector* vec, int i, int ele);
 void prepend(vector* vec, int ele);
 int pop(vector* vec);
-void delete(vector* vec, int i);
+int delete(vector* vec, int i);
 int rem(vector* vec, int ele);
 int find(vector* vec, int ele);
 
