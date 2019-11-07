@@ -1,5 +1,6 @@
 #include "vector.h"
-#include <stdlib.h> /* molloc, realloc */
+#include <stdlib.h> /* malloc, realloc */
+#include <string.h>
 #include <assert.h> /* assert()*/
 
 static void _resize(vector* vec);
@@ -13,7 +14,14 @@ vector* new_vector() {
   /* return vec; */
   vector* vec;
   vec = (vector*)malloc(sizeof(vector));
+  if (vec == NULL) {
+    return NULL;
+  }
   vec->data = malloc(INITIAL_CAPACITY * sizeof(int));
+  if (vec->data == NULL) {
+    free(vec);
+    return NULL;
+  }
   vec->size = 0;
   vec->capacity = INITIAL_CAPACITY;
 
@@ -43,12 +51,16 @@ int insert(vector* vec, int i, int ele) {
     return INDEX_OUT_OF_BOUND;
   }
 
-  int counter = vec->size - i;
-  int* p = vec->data + vec->size;
-  while(counter--) {
-    *p = *(p - 1);
-    p--;
-  }
+  /* int counter = vec->size - i; */
+  /* int* p = vec->data + vec->size; */
+  /* while(counter--) { */
+  /*   *p = *(p - 1); */
+  /*   p--; */
+  /* } */
+  /* *(vec->data + i) = ele; */
+  /* vec->size += 1; */
+
+  memmove(vec->data + i + 1, vec->data + i, vec->size - i);
   *(vec->data + i) = ele;
   vec->size += 1;
   _resize(vec);
