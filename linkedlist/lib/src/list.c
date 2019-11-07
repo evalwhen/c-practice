@@ -33,7 +33,7 @@ bool empty(linked_list* l) {
 }
 
 error value_at(linked_list* l, size_t i, value* v) {
-  if (i < 0 || i > l->size) {
+  if (i < 0 || i >= l->size) {
 
     return INDEX_OUT_OF_BOUND;
   }
@@ -43,7 +43,7 @@ error value_at(linked_list* l, size_t i, value* v) {
     p = p->next;
   }
 
-  *v = *p;
+  *v = p->value;
 
   return SUCCESS;
 }
@@ -52,7 +52,7 @@ error value_at(linked_list* l, size_t i, value* v) {
 error push_front(linked_list* l, value v) {
   linked_list* node = (linked_list*) malloc(sizeof(linked_list));
 
-  if (node == null) {
+  if (node == NULL) {
     return INSUFFICIENT_MEMORY;
   }
 
@@ -63,7 +63,7 @@ error push_front(linked_list* l, value v) {
 
   l->size += 1;
 
-  return success;
+  return SUCCESS;
 }
 
 
@@ -109,7 +109,7 @@ error push_back(linked_list* l, value v) {
 
 error pop_back(linked_list* l, value* v) {
   linked_list* pl = l;
-  linked_list* end_ptr, before_end_ptr;
+  linked_list* end_ptr, *before_end_ptr;
 
   if (l->size == 0) {
     return NO_VALUE;
@@ -133,30 +133,25 @@ error pop_back(linked_list* l, value* v) {
   return SUCCESS;
 }
 
-error front(linked_list* l, value* v) {
-  if (l->size == 0) {
-    return NO_VALUE;
+value front(linked_list* l) {
+  if (l->next) {
+    return l->next->value;
   }
-
-  *v = l->next->value;
-
-  return SUCCESS;
+  return NULL;
 }
 
-error back(linked_list* l, value* v) {
-  if (l->size ==0) {
-    return NO_VALUE;
-  }
-
+value back(linked_list* l) {
   linked_list* pl = l;
 
   while(pl->next) {
     pl = pl->next;
   }
 
-  *v = pl->value;
-
-  return SUCCESS;
+  if (pl != l) {
+    return pl->value;
+  } else {
+    return NULL;
+  }
 }
 
 error insert(linked_list* l, size_t i, value v) {
@@ -213,30 +208,34 @@ error erase(linked_list* l, size_t i) {
 }
 
 /*
-  NULL    -- -> -- -> -- -> --
+  NULL    -- -> -- -> --
     p     c     n
 
-  NULL <- --    -- -> -- -> --
+  NULL <- --    -- -> --
           p     c     n
+
+  NULL <- -- <- -- -> --
+                p     c  nxt
+
  */
 void reverse(linked_list* l) {
 
   if (l->size <= 1) {
-    return l;
+    return;
   }
 
   linked_list* previous = NULL;
   linked_list* current = l->next;
-  linked_list* nxt = current->next;
+  linked_list* next;
 
-  while(nxt) {
+  while(current) {
+    next = current->next;
     current->next = previous;
     previous = current;
-    current = nxt;
-    next = nxt->next;
+    current = next;
   }
 
-  l->next = current;
+  l->next = previous;
 }
 
 error value_n_from_end(linked_list* l, size_t n, value* v) {
@@ -247,4 +246,14 @@ error value_n_from_end(linked_list* l, size_t n, value* v) {
 int remove_value(value v) {
   //TODO: implement;
   return 0;
+}
+
+void destruct(linked_list* l) {
+  linked_list* p = l->next;
+  while(p) {
+    linked_list* tmp;
+    tmp = p->next;
+    free(p);
+    p = tmp;
+  }
 }
