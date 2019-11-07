@@ -1,4 +1,6 @@
-## dynamic array
+## spec
+[coding-university]
+## [dynamic array](https://github.com/evalwhen/coding-interview-university#arrays)
     - [X] Implement a vector (mutable array with automatic resizing):
         - [X] Practice coding using arrays and pointers, and pointer math to jump to an index instead of using indexing.
         - [X] new raw data array with allocated memory
