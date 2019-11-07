@@ -25,5 +25,5 @@ mkdir build
 cd build
 cmake -DCMAKE_BUILD_TYPE=Debug ../
 make
-./test/test_lib_vector
+./test/test_linked_list
 ```
