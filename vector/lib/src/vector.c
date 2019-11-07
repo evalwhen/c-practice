@@ -88,9 +88,12 @@ int delete(vector* vec, int i) {
   }
 
   int val = *(vec->data + i);
-  for (; i < (vec->size - 1); i++) {
-    *(vec->data + i) = *(vec->data + i + 1);
-  }
+
+  /* for (; i < (vec->size - 1); i++) { */
+  /*   *(vec->data + i) = *(vec->data + i + 1); */
+  /* } */
+
+  memmove(vec->data + i, vec->data + i + 1, vec->size - i - 1);
 
   vec->size -= 1;
 
