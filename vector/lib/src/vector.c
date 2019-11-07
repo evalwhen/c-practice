@@ -5,10 +5,17 @@
 static void _resize(vector* vec);
 static void _shrink(vector* vec);
 
-vector construct() {
-  vector vec = {NULL, 0, INITIAL_CAPACITY};
-  int* data = malloc(INITIAL_CAPACITY * sizeof(int));
-  vec.data = data;
+vector* new_vector() {
+  /* vector vec = {NULL, 0, INITIAL_CAPACITY}; */
+  /* int* data = malloc(INITIAL_CAPACITY * sizeof(int)); */
+  /* vec.data = data; */
+
+  /* return vec; */
+  vector* vec;
+  vec = (vector*)malloc(sizeof(vector));
+  vec->data = malloc(INITIAL_CAPACITY * sizeof(int));
+  vec->size = 0;
+  vec->capacity = INITIAL_CAPACITY;
 
   return vec;
 }

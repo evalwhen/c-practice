@@ -12,7 +12,7 @@ typedef struct {
 
 typedef enum {SUCCESS, INDEX_OUT_OF_BOUND} error;
 
-vector construct();
+vector* new_vector();
 size_t size(vector* vec);
 size_t capacity(vector* vec);
 int is_empty(vector* vec);
