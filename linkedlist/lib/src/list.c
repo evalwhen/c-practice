@@ -256,4 +256,5 @@ void destruct(linked_list* l) {
     free(p);
     p = tmp;
   }
+  free(l);
 }
