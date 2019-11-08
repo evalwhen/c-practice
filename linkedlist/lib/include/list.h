@@ -1,5 +1,5 @@
-#ifndef VECTOR_LIB_H__
-#define VECTOR_LIB_H__
+#ifndef LIST_LIB_H__
+#define LIST_LIB_H__
 #include <stdlib.h>
 #include <stdbool.h>
 
