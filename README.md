@@ -1,5 +1,5 @@
 # c-practice
-Write some c code.
+Write some C code.
 
 ## Bitmap
 ## Vector
