@@ -10,6 +10,8 @@ typedef void* Value;
 
 typedef bool (*ValueEqualFunc)(Value a, Value b);
 
+typedef ListEntry* LinkList;
+
 #define VALUE_NULL ((void*) 0)
 
 struct _ListEntry {

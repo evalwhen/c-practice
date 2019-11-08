@@ -28,7 +28,7 @@ static bool is_equal(Value a, Value b) {
 
 
 static void test_push_back() {
-  ListEntry* l;
+  LinkList l;
   l = NULL;
   push_back(&l, (Value)(0));
   push_back(&l, (Value)(1));
@@ -40,7 +40,7 @@ static void test_push_back() {
 }
 
 static void test_pop_back() {
-  ListEntry* l;
+  LinkList l;
   l = NULL;
   push_back(&l, (Value)(0));
   push_back(&l, (Value)(1));
@@ -61,7 +61,7 @@ static void test_pop_back() {
 }
 
 static void test_back() {
-  ListEntry* l;
+  LinkList l;
   l = NULL;
   push_back(&l, (Value)(0));
   push_back(&l, (Value)(1));
@@ -72,7 +72,7 @@ static void test_back() {
 }
 
 static void test_insert() {
-  ListEntry* l;
+  LinkList l;
   l = NULL;
   insert(&l, 0, (Value) 0);
   insert(&l, 1, (Value) 1);
@@ -87,7 +87,7 @@ static void test_insert() {
 }
 
 static void test_erase() {
-  ListEntry* l;
+  LinkList l;
   l = NULL;
   insert(&l, 0, (Value) 0);
   insert(&l, 1, (Value) 1);
@@ -103,7 +103,7 @@ static void test_erase() {
 }
 
 static void test_remove_value() {
-  ListEntry* l;
+  LinkList l;
   l = NULL;
   push_back(&l, (Value) &x);
   push_back(&l, (Value) &y);
