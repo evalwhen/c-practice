@@ -43,7 +43,7 @@ Value erase(ListEntry** l, size_t i);
 
 Value value_n_from_end(ListEntry* l, size_t n);
 
-void reverse(ListEntry* l);
+void reverse(ListEntry** l);
 
 size_t remove_value(ListEntry** l, Value v, ValueEqualFunc func);
 

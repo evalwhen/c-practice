@@ -120,6 +120,40 @@ static void test_remove_value() {
   destruct(&l);
 }
 
+static void test_reverse() {
+  LinkList l;
+  l = NULL;
+  push_back(&l, (Value) &x);
+  push_back(&l, (Value) &y);
+  push_back(&l, (Value) &z);
+  EXPECT_EQ_INT(3, size(l));
+
+  reverse(&l);
+
+  EXPECT_EQ_INT(3, size(l));
+  EXPECT_EQ_INT((Value) &x, back(l));
+
+  destruct(&l);
+}
+
+static void test_n_from_end() {
+  LinkList l;
+  l = NULL;
+  push_back(&l, (Value) &x);
+  push_back(&l, (Value) &y);
+  push_back(&l, (Value) &z);
+  EXPECT_EQ_INT(3, size(l));
+
+
+  EXPECT_EQ_INT(&z, value_n_from_end(l, 1));
+  EXPECT_EQ_INT(&y, value_n_from_end(l, 2));
+  EXPECT_EQ_INT(&x, value_n_from_end(l, 3));
+
+  destruct(&l);
+}
+
+
+
 static void run_all_test() {
   test_push_back();
   test_pop_back();
@@ -127,6 +161,8 @@ static void run_all_test() {
   test_insert();
   test_erase();
   test_remove_value();
+  test_reverse();
+  test_n_from_end();
 }
 
 int main() {

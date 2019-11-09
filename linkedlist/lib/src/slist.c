@@ -172,9 +172,44 @@ Value erase(ListEntry** l, size_t i) {
   free(inode);
 }
 
-Value value_n_from_end(ListEntry* l, size_t n);
+Value value_n_from_end(ListEntry* l, size_t n) {
 
-void reverse(ListEntry* l);
+  if (n == 0) {
+    return VALUE_NULL;
+  }
+
+  ListEntry *fast, *slow;
+  fast = slow = l;
+
+  while(fast) {
+    fast = fast->next;
+
+    if (n != 0) {
+      n--;
+    } else {
+      slow = slow->next;
+    }
+  }
+
+  return slow->data;
+}
+
+void reverse(ListEntry** l) {
+
+  ListEntry* previous = NULL;
+  ListEntry* current;
+
+  current = *l;
+
+  while(current) {
+    ListEntry* next = current->next;
+    current->next = previous;
+    previous = current;
+    current = next;
+  }
+
+  *l = previous;
+}
 
 size_t remove_value(ListEntry** l, Value v, ValueEqualFunc func) {
 
