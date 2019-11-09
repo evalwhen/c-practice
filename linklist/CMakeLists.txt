@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(linkedlist)
+project(linklist)
 
 add_subdirectory(lib)
 
