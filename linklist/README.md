@@ -1,5 +1,5 @@
 ## [Linked List](https://github.com/evalwhen/coding-interview-university#data-structures)
-    - [ ] implement (I did with tail pointer & without):
+    - [X] implement (I did with tail pointer & without):
         - [X] size() - returns number of data elements in list
         - [X] empty() - bool returns true if empty
         - [X] value_at(index) - returns the value of the nth item (starting at 0 for first)
