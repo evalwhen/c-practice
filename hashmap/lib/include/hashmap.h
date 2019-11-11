@@ -13,18 +13,19 @@ typedef struct {
   MapValue value;
 } MapEntry;
 
-typedef struct {
+struct _hashMap {
   MapEntry* _data;
   size_t _capacity;
   size_t _size;
   size_t _prime;
   size_t _rand_a;
   size_t _rand_b;
-} HashMap;
+};
+typedef struct _hashMap* HashMap;
 
-#define DEFAULT_CAPACITY = 16;
+#define DEFAULT_CAPACITY  16
 
-#define SENTINEL = ~0;
+#define SENTINEL -1;
 
 HashMap new_hashmap();
 
@@ -34,7 +35,7 @@ bool get(HashMap m, MapKey k, MapValue* v);
 
 bool exists(HashMap m, MapKey k);
 
-bool remove(HashMap m, MapKey k);
+bool remove_key(HashMap m, MapKey k);
 
 bool is_prime(int n);
 

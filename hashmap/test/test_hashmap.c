@@ -6,13 +6,6 @@ static int test_count = 0;
 static int test_pass = 0;
 static int x = 0, y = 1, z = 2;
 
-static bool is_equal(Value a, Value b) {
-  int *x, *y;
-  x = (int*) a;
-  y = (int*) b;
-  return (*x == *y) ? true : false;
-}
-
 #define EXPECT_EQ_BASE(equality, expect, actual, format)\
   do {\
     test_count++;\
@@ -26,14 +19,18 @@ static bool is_equal(Value a, Value b) {
 
 #define EXPECT_EQ_INT(expect, actual) EXPECT_EQ_BASE((expect) == (actual), expect, actual, "%d")
 
-static test_hashmap() {
+static void test_hashmap() {
   HashMap h;
 
-  HashKey k = 2;
-  HashValue v = 3;
-  add(h, k, v);
+  h = new_hashmap();
 
-  EXPECT_EQ_INT(3, get(h, k));
+  MapKey k = 2;
+  MapValue v = 3;
+  add(h, k, v);
+  MapValue ret;
+  ret = 0;
+  EXPECT_EQ_INT(true, get(h, k, &ret));
+  EXPECT_EQ_INT(3, ret);
 }
 
 static void run_all_test() {
