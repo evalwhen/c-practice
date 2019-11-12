@@ -86,6 +86,34 @@ MapValue get(HashMap m, MapKey k) {
   }
 }
 
+bool exists(HashMap m, MapKey k) {
+  int j = find_slot(m, hash_value(m, k), k);
+
+  if (j < 0) {
+    return false;
+  } else {
+
+    return true;
+  }
+}
+
+bool remove_key(HashMap m, MapKey k) {
+
+  int j = find_slot(m, hash_value(m, k), k);
+
+  if (j < 0) {
+
+    return false;
+  } else {
+
+    m->_data[j] = SENTINEL;
+    m->_size -= 1;
+
+    return true;
+  }
+}
+
+
 
 bool is_prime(int n) {
 

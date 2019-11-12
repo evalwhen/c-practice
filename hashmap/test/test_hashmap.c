@@ -31,6 +31,13 @@ static void test_hashmap() {
 
   EXPECT_EQ_INT(10, entry_size(h));
 
+  EXPECT_EQ_INT(true, exists(h, 8));
+
+  remove_key(h, 8);
+
+  EXPECT_EQ_INT(9, entry_size(h));
+  EXPECT_EQ_INT(false, exists(h, 8));
+
   destruct_hashmap(h);
 }
 
