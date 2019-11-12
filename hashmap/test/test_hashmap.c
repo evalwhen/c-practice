@@ -4,7 +4,6 @@
 static int main_ret = 0;
 static int test_count = 0;
 static int test_pass = 0;
-static int x = 0, y = 1, z = 2;
 
 #define EXPECT_EQ_BASE(equality, expect, actual, format)\
   do {\
@@ -25,12 +24,12 @@ static void test_hashmap() {
   h = new_hashmap();
 
   int j = 10;
-  for (int i = 0; i < 5; i++, j++) {
+  for (int i = 0; i < 10; i++, j++) {
     add(h, i, j);
     EXPECT_EQ_INT(j, get(h, i));
   }
 
-  EXPECT_EQ_INT(5, entry_size(h));
+  EXPECT_EQ_INT(10, entry_size(h));
 
   destruct_hashmap(h);
 }

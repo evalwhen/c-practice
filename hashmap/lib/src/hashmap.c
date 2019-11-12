@@ -10,6 +10,7 @@ static int hash_code(MapKey key);
 static int hash_value(HashMap m, MapKey key);
 static int find_slot(HashMap m, int h, MapKey k);
 static bool is_equal_entry(MapEntry a, MapEntry b);
+static void resize(HashMap m);
 
 HashMap new_hashmap() {
   HashMap m;
@@ -67,7 +68,10 @@ void add(HashMap m, MapKey k, MapValue v) {
     m->_data[-(j+1)] = entry;
     m->_size += 1;
 
-    // TODO: 需要增大capacity, 如果 size / capacity 小于0.5
+    // 增大capacity, 如果 size / capacity 小于0.5
+    if (m->_size > (m->_capacity / 2)) {
+      resize(m);
+    }
   }
 }
 
@@ -177,4 +181,22 @@ static int find_slot(HashMap m, int h, MapKey k) {
 
 static bool is_equal_entry(MapEntry a, MapEntry b) {
   return (a.key == b.key && a.value == b.value);
+}
+
+
+static void resize(HashMap m) {
+
+  MapEntry* data;
+
+  data = (MapEntry* ) malloc(2 * m->_capacity * sizeof(MapEntry));
+  if (NULL == data) {
+    return;
+  }
+
+  memmove(data, m->_data, m->_capacity * sizeof(MapEntry));
+
+  m->_capacity = 2 * m->_capacity;
+  m->_data = data;
+
+  return;
 }
