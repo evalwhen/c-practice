@@ -3,6 +3,9 @@
 #include <string.h>
 // 通过线性探测（linear probing) 实现 hashmap
 
+const MapEntry SENTINEL = {~0, ~0};
+const MapEntry NULL_ENTRY = {0, 0};
+
 static int hash_code(MapKey key);
 static int hash_value(HashMap m, MapKey key);
 static int find_slot(HashMap m, int h, MapKey k);
@@ -23,7 +26,7 @@ HashMap new_hashmap() {
     return NULL;
   }
 
-  /* memset(m->_data, 0, DEFAULT_CAPACITY * sizeof(MapEntry*)); */
+  memset(m->_data, 0, DEFAULT_CAPACITY * sizeof(MapEntry*));
 
   m->_capacity = DEFAULT_CAPACITY;
   // 使用 Multiply-Add-and-Divide 限制 key hash 值在 0 至 capacity 区间内均匀分布,减少碰撞。
@@ -33,6 +36,21 @@ HashMap new_hashmap() {
   m->_size = 0;
 
   return m;
+}
+
+void destruct_hashmap(HashMap h) {
+  if (h == NULL) {
+    return;
+  } else {
+    if (h->_data != NULL) {
+      free(h->_data);
+    }
+    free(h);
+  }
+}
+
+size_t entry_size(HashMap m) {
+  return m->_size;
 }
 
 void add(HashMap m, MapKey k, MapValue v) {
@@ -47,20 +65,20 @@ void add(HashMap m, MapKey k, MapValue v) {
     entry.value = v;
 
     m->_data[-(j+1)] = entry;
+    m->_size += 1;
 
     // TODO: 需要增大capacity, 如果 size / capacity 小于0.5
   }
 }
 
-bool get(HashMap m, MapKey k, MapValue* v) {
+MapValue get(HashMap m, MapKey k) {
   int j = find_slot(m, hash_value(m, k), k);
 
   if (j < 0) {
-    return false;
+    return 0;
   } else {
     assert(m->_data[j].key == k);
-    *v = m->_data[j].value;
-    return true;
+    return m->_data[j].value;
   }
 }
 
@@ -133,19 +151,15 @@ static int hash_value(HashMap m, MapKey key) {
 static int find_slot(HashMap m, int h, MapKey k) {
   int j;
   j = h;
-  MapEntry sentinel;
-  MapEntry null_entry;
-  sentinel.key = ~0;
-  sentinel.value = ~0;
 
   int slot = -1;
 
   do {
-    if (is_equal_entry(m->_data[j], null_entry) || is_equal_entry(m->_data[j], sentinel)) {
+    if (is_equal_entry(m->_data[j], NULL_ENTRY) || is_equal_entry(m->_data[j], SENTINEL)) {
       if (slot == -1) {
         slot = j;
       }
-      if (is_equal_entry(m->_data[j], null_entry)) {
+      if (is_equal_entry(m->_data[j], NULL_ENTRY)) {
         break;
       }
     } else {
@@ -162,5 +176,5 @@ static int find_slot(HashMap m, int h, MapKey k) {
 }
 
 static bool is_equal_entry(MapEntry a, MapEntry b) {
-  return a.key == b.key && a.value == b.value;
+  return (a.key == b.key && a.value == b.value);
 }

@@ -25,13 +25,13 @@ typedef struct _hashMap* HashMap;
 
 #define DEFAULT_CAPACITY  16
 
-#define SENTINEL -1;
-
 HashMap new_hashmap();
+
+size_t entry_size(HashMap m);
 
 void add(HashMap m, MapKey k, MapValue v);
 
-bool get(HashMap m, MapKey k, MapValue* v);
+MapValue get(HashMap m, MapKey k);
 
 bool exists(HashMap m, MapKey k);
 
@@ -43,5 +43,6 @@ int get_next_prime_larger_than(int n);
 
 uint32_t randint (uint32_t a, uint32_t b);
 
+void destruct_hashmap(HashMap h);
 
 #endif

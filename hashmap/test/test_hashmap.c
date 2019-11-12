@@ -24,13 +24,15 @@ static void test_hashmap() {
 
   h = new_hashmap();
 
-  MapKey k = 2;
-  MapValue v = 3;
-  add(h, k, v);
-  MapValue ret;
-  ret = 0;
-  EXPECT_EQ_INT(true, get(h, k, &ret));
-  EXPECT_EQ_INT(3, ret);
+  int j = 10;
+  for (int i = 0; i < 5; i++, j++) {
+    add(h, i, j);
+    EXPECT_EQ_INT(j, get(h, i));
+  }
+
+  EXPECT_EQ_INT(5, entry_size(h));
+
+  destruct_hashmap(h);
 }
 
 static void run_all_test() {
