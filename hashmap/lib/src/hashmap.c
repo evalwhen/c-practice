@@ -180,6 +180,16 @@ static int hash_value(HashMap m, MapKey key) {
   return ((m->_rand_a * hash_code(key) + m->_rand_b) % m->_prime) % m->_capacity;
 }
 
+/*
+  线性探测通过将冲突的 key 存放(put)在相邻连续的区域来方便查找(get)。
+
+  也就是说,key是如何放入的就如何取出。
+
+  查找一个key是否存在，只需要在这段连续的区域上遍历直到连续性结束（找到一个 NULL)。
+
+  删除key的操作不能简单的将kye占据的位置置为 NULL, 这会破坏连续性,导致其后的元素找不到。
+  因此可以用一个哨兵值来作为标记，在遍历时跳过该位置。但要将其作为可用存储空间。
+ */
 static int find_slot(HashMap m, int h, MapKey k) {
   int j;
   j = h;
