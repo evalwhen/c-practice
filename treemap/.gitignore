@@ -1,0 +1,14 @@
+CMakeCache.txt
+CMakeFiles
+GPATH
+GRTAGS
+GTAGS
+bitmap_test
+*.a
+*.cmake
+vgcore.*
+Makefile
+.idea
+*.cbp
+build/*
+cmake*
