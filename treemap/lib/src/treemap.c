@@ -17,6 +17,10 @@ static void rebalance_insert(TreeMap t, Node* n);
 static void resolve_red(TreeMap, Node*);
 static void rebalance_delete(TreeMap, Node*);
 static void remedy_double_black(TreeMap, Node*);
+static void rebalance(TreeMap, Node*);  // AVL
+static int height(Node* p);
+static void recompute_height(Node* p);
+static bool is_balanced(Node* p);
 
 size_t size(TreeMap t) {
   return t->size;
@@ -356,4 +360,58 @@ static void remedy_double_black(TreeMap t, Node* p) {
     z->aux = Red;
     remedy_double_black(t, p);
   }
+}
+
+static int height(Node* p) {
+  return p->aux;
+}
+
+static Node* taller_child(Node* p) {
+  if (height(p->left) > height(p->right)) {
+    return p->left;
+  } else if (height(p->left) < height(p->right)) {
+    return p->right;
+  } else {
+    if (p == p->parent->left) {
+      return p->left;
+    } else {
+      return p->right;
+    }
+  }
+}
+
+
+static void recompute_height(Node* p) {
+  int max = 0;
+  if (height(p->left) >= height(p->right)) {
+    p->aux = height(p->left) + 1;
+  } else {
+    p->aux = height(p->right) + 1;
+  }
+}
+
+static bool is_balanced(Node* p) {
+  int x = height(p->left) - height(p->right);
+  if (x < 0) {
+    x = -x;
+  }
+
+  return x <= 1;
+}
+
+static void rebalance(TreeMap t, Node* p) {
+  int old_height, new_height;
+
+  do {
+    old_height = height(p);
+    if (!is_balanced(p)) {
+      Node* middle = restructure(t, taller_child(taller_child(p)));
+      recompute_height(middle->left);
+      recompute_height(middle->right);
+      p = middle;
+    }
+    recompute_height(p);
+    new_height = height(p);
+    p = p->parent;
+  } while(new_height != old_height && p != NULL);
 }
