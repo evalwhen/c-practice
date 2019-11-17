@@ -15,7 +15,7 @@ typedef struct _Entry {
 
 typedef struct _Node Node;
 
-typedef enum _Color {Red, Black} Color;
+typedef enum _Color {Black = 0, Red = 1} Color;
 
 struct _Node {
   Entry ele;
