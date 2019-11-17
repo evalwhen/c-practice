@@ -22,7 +22,7 @@ struct _Node {
   Node *parent;
   Node *left;
   Node *right;
-  Color color;
+  int aux;  // 被 AVL 和 RedBlack rebalance 复用。
 };
 
 typedef struct _TreeMap* TreeMap;

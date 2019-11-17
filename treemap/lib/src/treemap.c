@@ -171,7 +171,7 @@ static Node* create_node() {
   root->parent = NULL;
   root->left = NULL;
   root->right = NULL;
-  root->color = Black;
+  root->aux = Black;
 
   return root;
 }
@@ -276,7 +276,7 @@ static Node* restructure(TreeMap t, Node* n) {
 static void rebalance_insert(TreeMap t, Node* n) {
   // 新插入的节点不是root节点
   if (n->parent != NULL){
-    n->color = Red;
+    n->aux = Red;
     resolve_red(t, n);
   }
 }
@@ -288,22 +288,22 @@ static void resolve_red(TreeMap t, Node* n) {
   parent = n->parent;
 
   // 打破红黑树的 red-propertity: 红节点的孩子节点都是黑节点
-  if (parent->color == Red) {
+  if (parent->aux == Red) {
     uncle = sibling(parent);
-    if (uncle->color == Black) {
+    if (uncle->aux == Black) {
       middle = restructure(t, n);
-      middle->color = Black;
-      middle->left->color = Red;
-      middle->right->color = Red;
+      middle->aux = Black;
+      middle->left->aux = Red;
+      middle->right->aux = Red;
       // 相当于2-3-4树的split操作
     } else {
       grand = parent->parent;
-      parent->color = Black;
-      uncle->color = Black;
+      parent->aux = Black;
+      uncle->aux = Black;
 
       // root-propertity: 根节点必须是黑节点
       if (!is_root(grand)) {
-        grand->color = Red;
+        grand->aux = Red;
         resolve_red(t, grand);
       }
     }
@@ -312,13 +312,13 @@ static void resolve_red(TreeMap t, Node* n) {
 
 
 static void rebalance_delete(TreeMap t, Node* p) {
-  if (p->color == Red) {
-    p->color = Black;
+  if (p->aux == Red) {
+    p->aux = Black;
   } else {
     if (!is_root(p)) {
       Node* y = sibling(p);
       if (is_internal(y)) {
-        if (y->color == Black || is_internal(y->left)) {
+        if (y->aux == Black || is_internal(y->left)) {
           remedy_double_black(t, p);
         }
       }
@@ -330,19 +330,19 @@ static void remedy_double_black(TreeMap t, Node* p) {
   Node* y = sibling(p);
   Node* z = y->parent;
 
-  if (y->color == Black) {
+  if (y->aux == Black) {
     // 2-3-4 transfer
-    if (y->left->color == Red || y->right->color == Red) {
-      Node* red_child = (y->left->color == Red) ? y->left : y->right;
+    if (y->left->aux == Red || y->right->aux == Red) {
+      Node* red_child = (y->left->aux == Red) ? y->left : y->right;
       Node* middle = restructure(t, red_child);
-      middle->color = z->color;
-      middle->left->color = Black;
-      middle->right->color = Black;
+      middle->aux = z->aux;
+      middle->left->aux = Black;
+      middle->right->aux = Black;
       // 2-3-4 fuse
     } else {
-      y->color = Red;
-      if (z->color == Red) {
-        z->color == Black;
+      y->aux = Red;
+      if (z->aux == Red) {
+          z->aux == Black;
       } else {
         if (!is_root(z)) {
           remedy_double_black(t, z);
@@ -352,8 +352,8 @@ static void remedy_double_black(TreeMap t, Node* p) {
   } else {
     Node* z = y->parent;
     rotate(t, y);
-    y->color = Black;
-    z->color = Red;
+    y->aux = Black;
+    z->aux = Red;
     remedy_double_black(t, p);
   }
 }
