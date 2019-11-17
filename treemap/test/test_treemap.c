@@ -32,9 +32,11 @@ static void test_treemap() {
   EXPECT_EQ_INT(6, get(t, 5));
 
   delete(t, 2);
+  delete(t, 3);
 
   EXPECT_EQ_INT(0, get(t, 2));
-  EXPECT_EQ_INT(2, size(t));
+  EXPECT_EQ_INT(0, get(t, 3));
+  EXPECT_EQ_INT(1, size(t));
 
   destruct_treemap(t);
 }
