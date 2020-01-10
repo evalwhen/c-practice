@@ -11,5 +11,15 @@ int main(int argc, char* argv[]) {
   }
   printf("\n");
 
+  int seq2[] = {1, 5, 4, 2, 3, 6};
+
+  quick_sort(seq2, 0, N-1);
+
+  for (int i = 0; i < N; i++) {
+    printf("%d\n", seq2[i]);
+  }
+
+  printf("\n");
+
   return 0;
 }
